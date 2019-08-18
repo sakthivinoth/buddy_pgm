@@ -19,7 +19,7 @@ from django.urls import path
 from home.views import home_view
 from usefulinfo.views import usefulinfo_view
 from bvisa.views import bvisa_add_view, bvisa_detail_view
-from gcp.views import gcp_view
+from gcp.views import gcp_view,gcp_add_view,gcp_detail_view
 
 
 urlpatterns = [
@@ -28,6 +28,8 @@ urlpatterns = [
     path('usefulinfo/',usefulinfo_view,name='usefulinfo'),
     path('bvisa/bvisa_add.html',bvisa_add_view,name='bvisa_add'),
     path('bvisa/detail.html',bvisa_detail_view,name='bvisa_detail'),
+    path('gcp/gcp_add.html',gcp_add_view,name='gcp_add'),
+    path('gcp/gcp_detail.html',gcp_detail_view,name='gcp_detail'),
     path('gcp/',gcp_view,name='gcp'),
     path('admin/', admin.site.urls),
 ]

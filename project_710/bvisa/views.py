@@ -7,6 +7,7 @@ from .models import Bvisa
 
 def bvisa_add_view(request, *args, **kwargs):
 	form = RawBvisaForm(request.GET)
+	context= {"form":form}
 	if request.method=="POST":
 		form = RawBvisaForm(request.POST)
 		context ={"form":form}
