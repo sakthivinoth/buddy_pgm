@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>B1 Add page </h1>
+
+<form action='bvisa_add.html' method='POST'>{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value="Save"/>
+	
+
+</form>
+
+{% endblock%}

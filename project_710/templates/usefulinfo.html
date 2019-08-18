@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>useful link page </h1>
+
+<p>
+{{ hello }}	
+</p>
+
+<ul>
+{% for item in list %}
+ {% if item != 2 %}
+<li>{{ item }}</li>
+{% endif %}
+{% endfor%}
+</ul>
+
+{% endblock%}
