@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import BvisaAddForm,RawBvisaForm
+from .forms import BvisaAddForm#,RawBvisaForm
 from .models import Bvisa
 
 import smtplib
@@ -29,19 +29,23 @@ import smtplib
 
 def send_mail(data):
 	server = smtplib.SMTP_SSL('smtp.gmail.com',465)
-	server.login('rsakthivinoth@gmail.com','Windows@123')
+	server.login('rsakthivinoth@gmail.com','******')
 	server.sendmail("rsakthivinoth@gmail.com","rsakthivinoth@gmail.com", data)
 	server.quit()
 
 def bvisa_add_view(request, *args, **kwargs):
-	form = BvisaAddForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		clean = form.cleaned_data
+	if request.method =='POST':
+	    form = BvisaAddForm(request.POST or None)
+	    if form.is_valid():
+		    form.save()
+		    clean = form.cleaned_data
 		
-		send_mail(str(clean))
-		return redirect('../')
-	context ={'form':form}
+		    #send_mail(str(clean))
+		    return redirect('../')
+	    context ={'form':form}
+	else:
+		form = BvisaAddForm()
+		context = {'form':form}
 	return render (request,'bvisa/bvisa_add.html',context)
 
 # Create your views here.
