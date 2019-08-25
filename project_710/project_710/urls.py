@@ -18,9 +18,8 @@ from django.urls import path
 
 from home.views import home_view
 from usefulinfo.views import usefulinfo_view
-from bvisa.views import bvisa_add_view, bvisa_detail_view
-from gcp.views import GCP_add_view, GCP_view
-
+from bvisa.views import bvisa_add_view
+from gcp.views import GCP_add_view
 
 urlpatterns = [
     path('',home_view,name='home'),
