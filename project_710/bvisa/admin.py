@@ -4,4 +4,7 @@ from django.contrib import admin
 from .models import Bvisa
 
 
-admin.site.register(Bvisa)
+class BvisaAdmin(admin.ModelAdmin):
+	list_display = [field.attname for field in Bvisa._meta.fields]
+
+admin.site.register(Bvisa,BvisaAdmin)

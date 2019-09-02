@@ -24,7 +24,7 @@ def GCP_add_view(request, *args, **kwargs):
 		    if clean:
 		        send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
 		        context ={'form':form}
-		        messages.success(request, 'Form validation successful.Thanks you!!')
+		        messages.success(request, 'Form validation successful.Thank you!!')
 		        return HttpResponseRedirect('')
 	    else:
 	    	messages.warning(request, 'Form submission is not successful. Please retry with valid values')

@@ -17,3 +17,6 @@ class Bvisa(models.Model):
 	travel_end_date =  models.DateField(auto_now=False,auto_now_add=False)
 	CAPABILITY_OPTIONS = (("Capability1","Capability1"),("Capability2","Capability2"))
 	capability = models.CharField(max_length=20,choices=CAPABILITY_OPTIONS)
+     
+	def __str__(self):
+		return self.employee_name
