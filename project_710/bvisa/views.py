@@ -10,7 +10,7 @@ from django.contrib import messages
 def send_mail(employee_name, enterprise_id, project, no, start_date, end_date,cap):
 	print("sending mail")
 	server = smtplib.SMTP_SSL('smtp.gmail.com',465)
-	server.login('rsakthivinoth@gmail.com','Windows@123')
+	server.login('rsakthivinoth@gmail.com','********')
 	data = "Subject: Notification- New 710 Resource. Please assign a buddy !!\n Hey Admins, Please find the below Resource \n\nEmployee name = "+str(employee_name)+"\nEnterprise Id = "+str(enterprise_id)+"\nProject = "+str(project)+"\nContact number = "+str(no)+"\nTravel Start date = "+str(start_date)+"\nTravel end date = "+str(end_date)+"\nCapability = "+str(cap)+"\n\n\t **** This is a System generated mail. Please do not reply **** \n"
 	server.sendmail("rsakthivinoth@gmail.com","rsakthivinoth@gmail.com", data)
 	server.quit()
