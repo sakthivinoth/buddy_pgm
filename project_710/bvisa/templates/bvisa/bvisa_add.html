@@ -121,62 +121,21 @@
 <div class="container">
    <table class="table table-striped">
       <tbody>
-
+<form action='bvisa_add.html' method="post">
          <tr>
-            <td colspan="2">
-<form action='bvisa_add.html' method="post" novalidate>
-  {% csrf_token %}
+            <td colspan="1">
+    {% csrf_token %}
+    {{form}}
 
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field }}
-  {% endfor %}
 
-  {% if form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
-    </div>
-  {% endif %}
 
-  {% for field in form.visible_fields %}
-    <div class="form-group">
-      {{ field.label_tag }}
-
-      {% if form.is_bound %}
-        {% if field.errors %}
-          {% render_field field class="form-control is-invalid" %}
-          {% for error in field.errors %}
-            <div class="invalid-input">
-              {{ error }}
-            </div>
-          {% endfor %}
-        {% else %}
-          {% render_field field class="form-control is-valid" %}
-        {% endif %}
-      {% else %}
-        {% render_field field class="form-control" %}
-      {% endif %}
-
-      {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
-      {% endif %}
-    </div>
-  {% endfor %}
-{% if messages %}
-{% for message in messages %}
-  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-{% endfor %}
-{% endif %}
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 </td>
 </tr>
+<tr>
+  <td> <input type="submit" value="Submit" />
+  </td>
+</tr>
+</form>
 </tbody>
 </table>
 </div>
