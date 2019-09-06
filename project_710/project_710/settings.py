@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 #third party apps 
     'widget_tweaks',
+    'import_export',
 
 #own apps
     'bvisa',
@@ -122,7 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -131,6 +132,7 @@ STATICFILES_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
 
 from django.contrib.messages import constants as messages
 

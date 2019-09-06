@@ -22,7 +22,7 @@ def bvisa_add_view(request, *args, **kwargs):
 		    form.save()
 		    clean = form.cleaned_data
 		    if clean:
-		        send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+		        #send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
 		        context ={'form':form}
 		        messages.success(request, 'Form validation successful.Thank you!!')
 		        return HttpResponseRedirect('')
