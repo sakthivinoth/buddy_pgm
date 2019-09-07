@@ -2,6 +2,11 @@ from django import forms
 from .models import Bvisa
 from datetime import datetime
 from django.core.exceptions import ValidationError
+from bootstrap_datepicker_plus import DatePickerInput
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 
 class BvisaAddForm(forms.ModelForm):
 
@@ -18,7 +23,11 @@ class BvisaAddForm(forms.ModelForm):
 		'capability']
 
 	#attrs = {'class':'form-control'}
-	
+
+		widgets = {
+		            'travel_start_date': DateInput(),
+		            'travel_end_date': DateInput(),
+		        }
 	#widgets = {
 	# employee_name =forms.CharField(label='', widget=forms.TextInput()),
 	# enterprise_id=forms.CharField(label='', widget=forms.TextInput()),

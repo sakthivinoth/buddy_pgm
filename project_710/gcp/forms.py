@@ -2,6 +2,10 @@ from django import forms
 from .models import GCP
 from datetime import datetime
 from django.core.exceptions import ValidationError
+from bootstrap_datepicker_plus import DatePickerInput
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class GCPAddForm(forms.ModelForm):
 
@@ -16,6 +20,10 @@ class GCPAddForm(forms.ModelForm):
 		'travel_start_date',
 		'capability']
 
+		widgets = {
+		            'travel_start_date': DateInput(),
+		            'travel_end_date': DateInput(),
+		        }
 		# attrs = {'class':'form-control'}
 		# widgets = {
 		# 'employee_name':forms.TextInput(attrs=attrs),

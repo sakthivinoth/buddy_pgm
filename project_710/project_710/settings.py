@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 #third party apps 
     'widget_tweaks',
     'import_export',
+    'bootstrap_datepicker_plus',
 
 #own apps
     'bvisa',

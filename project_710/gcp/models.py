@@ -14,7 +14,7 @@ class GCP(models.Model):
 	project = models.CharField(max_length=20,choices=PROJECT_OPTIONS)
 	whatsapp_number_country_code = models.CharField(max_length=5)
 	whatsapp_number = models.DecimalField(max_digits=10,decimal_places=0)
-	travel_start_date = models.DateField(auto_now=False,auto_now_add=False)
+	travel_start_date = models.DateField()
 	CAPABILITY_OPTIONS = (("Capability1","Capability1"),("Capability2","Capability2"))
 	capability = models.CharField(max_length=20,choices=CAPABILITY_OPTIONS)
 
