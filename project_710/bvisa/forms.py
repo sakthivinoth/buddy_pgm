@@ -3,6 +3,7 @@ from .models import Bvisa
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from bootstrap_datepicker_plus import DatePickerInput
+from phonenumber_field.modelfields import PhoneNumberField
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -16,7 +17,7 @@ class BvisaAddForm(forms.ModelForm):
 		'employee_name',
 		'enterprise_id',
 		'project',
-		'whatsapp_number_country_code',
+		# 'whatsapp_number_country_code',
 		'whatsapp_number',
 		'travel_start_date',
 		'travel_end_date',
@@ -41,7 +42,6 @@ class BvisaAddForm(forms.ModelForm):
 
 
 
-
 	def clean_employee_name(self, *args, **kwargs):
 		employee_name = self.cleaned_data['employee_name']
 		if not employee_name:
@@ -49,13 +49,13 @@ class BvisaAddForm(forms.ModelForm):
 		return employee_name
 
 	def clean_whatsapp_number(self, *args, **kwargs):
-		whatsapp_number_country_code = self.cleaned_data['whatsapp_number_country_code']
-		if not whatsapp_number_country_code:
-			raise forms.ValidationError('Please enter your Whatsapp Number Country Code.')
+		# whatsapp_number_country_code = self.cleaned_data['whatsapp_number_country_code']
+		# if not whatsapp_number_country_code:
+		# 	raise forms.ValidationError('Please enter your Whatsapp Number Country Code.')
 		whatsapp_number = self.cleaned_data['whatsapp_number']
 		if not whatsapp_number:
 			raise forms.ValidationError('Please enter your Whatsapp Number.')
-		return str(whatsapp_number_country_code)+"-"+str(whatsapp_number)
+		return whatsapp_number
 
 	def clean_travel_start_date(self, *args, **kwargs):
 		travel_start_date = self.cleaned_data['travel_start_date']

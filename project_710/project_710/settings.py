@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 #third party apps 
     'widget_tweaks',
     'import_export',
+    'phonenumber_field',
     'bootstrap_datepicker_plus',
 
 #own apps
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'gcp',
     'usefulinfo',
 ]
+
+PHONENUMBER_DEFAULT_FORMAT='E164'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

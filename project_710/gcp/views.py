@@ -25,19 +25,19 @@ def send_succ_mail():
 
 def GCP_add_view(request, *args, **kwargs):
 	if request.method =='POST':
-	    form = GCPAddForm(request.POST or None)
-	    if form.is_valid():
-		    form.save()
-		    clean = form.cleaned_data
-		    if clean:
-		        #send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
-		        #send_succ_mail()
-		        context ={'form':form}
-		        messages.success(request, 'Form validation successful.Thank you!!')
-		        return HttpResponseRedirect('')
-	    else:
-	    	messages.warning(request, 'Form submission is not successful. Please retry with valid values')
-	    	return HttpResponseRedirect('')
+		form = GCPAddForm(request.POST or None)
+		if form.is_valid():
+			form.save()
+			clean = form.cleaned_data
+			if clean:
+				#send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+				#send_succ_mail()
+				context ={'form':form}
+				messages.success(request, 'Form validation successful.Thank you!!')
+				return HttpResponseRedirect('')
+		else:
+			messages.warning(request, 'Form submission is not successful. Please retry with valid values')
+			return HttpResponseRedirect('')
 	else:
 		form = GCPAddForm()
 		context = {'form':form}

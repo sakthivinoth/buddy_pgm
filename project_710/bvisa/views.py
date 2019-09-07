@@ -1,10 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-
+from django import forms
 from .forms import BvisaAddForm
 from .models import Bvisa
 
 import smtplib
+
 from django.contrib import messages
 
 def send_mail(employee_name, enterprise_id, project, no, start_date, end_date,cap):
@@ -25,32 +26,37 @@ def send_succ_mail():
 
 def bvisa_add_view(request, *args, **kwargs):
 	if request.method =='POST':
-	    form = BvisaAddForm(request.POST or None)
-	    if form.is_valid():
-		    form.save()
-		    clean = form.cleaned_data
-		    if clean:
-		        #send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
-		        #send_succ_mail()
-		        context ={'form':form}
-		        messages.success(request, 'Form validation successful.Thank you!!')
-		        return HttpResponseRedirect('')
-	    else:
-	    	messages.warning(request, 'Form submission is not successful. Please retry with valid values')
-	    	return HttpResponseRedirect('')
+		form = BvisaAddForm(request.POST)
+		print(form)
+		print(dir(form))
+		if form.is_valid():
+			print("validated")
+			model_instance = form.save(commit=False)
+			model_instance.save()
+			form.save()
+			clean = form.cleaned_data
+			if clean:
+				print("Clean")
+				print(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+				#send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+				#send_succ_mail()
+				context ={'form':form}
+				
+				messages.success(request, 'Form submission successful')
+				return HttpResponseRedirect('')
+			else:
+				print("into clean else")
+				print(form.errors.as_text)
+				print(dir(form.errors.as_text))
+				messages.error(request, 'Form submission not successful. Please retry with Valid values')
+				return HttpResponseRedirect('')
+		else:
+			print("into else ")
+			print(form.errors.as_text)
+			print(dir(form.errors.as_text))
+			messages.error(request, 'Form submission not successful. Please retry with Valid values')
+			return HttpResponseRedirect('')
 	else:
 		form = BvisaAddForm()
 		context = {'form':form}
 		return render (request,'bvisa/bvisa_add.html',context)
-
-# Create your views here.
-def bvisa_view(request,*args, **kwargs):
-	
-	context = {}
-	return render (request, "bvisa.html",context)
-
-
-def bvisa_detail_view(request, *args, **kwargs):
-	obj = Bvisa.objects.get(id=1)
-	context ={'object':obj}
-	return render (request,'bvisa/bvisa_detail.html',context)

@@ -128,6 +128,7 @@
     {% csrf_token %}
     {{form}}
 
+    </div>
 </td>
 </tr>
 <tr>
@@ -137,7 +138,18 @@
 </form>
 </tbody>
 </table>
+<li>Note: Enter phone number along with country code ex: +91xxxxxxxxxx</li>
 </div>
+<br>
+{% for fieldname, error_list in form.errors %}{% endfor %}
+<br>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark pt-4">
 
