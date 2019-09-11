@@ -8,15 +8,15 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Bvisa(models.Model):
-	employee_name = models.CharField(max_length=20)
-	enterprise_id = models.EmailField(max_length=40)
-	PROJECT_OPTIONS = (("Cigna","Cigna"),("Anthem","Anthem"))
-	project = models.CharField(max_length=20,choices=PROJECT_OPTIONS)
+	employee_name = models.CharField(max_length=50)
+	enterprise_id = models.EmailField(max_length=50)
+	PROJECT_OPTIONS = (("Cigna","Cigna"),("Anthem Inc","Anthem Inc"),("Kaiser Permanente","Kaiser Permanente"),("Novartis","Novartis"),("Citi Group","Citi Group"),("Banco Mercantil del Norte","Banco Mercantil del Norte"),("Devon Energy Corporation","Devon Energy Corporation"),("Henkel","Henkel"),("Cigna","Cigna"),("Laureate Education Inc","Laureate Education Inc"),("City of New York","City of New York"),("Best Buy","Best Buy"),("GE Digital","GE Digital"),("Motiva Enterprise LLC","Motiva Enterprise LLC"),("Walt Disney Direct-to-Consumer","Walt Disney Direct-to-Consumer"),("Aetna","Aetna"),("Accenture - Internal Organizations","Accenture - Internal Organizations"),("Freeport-Mcmoran Inc","Freeport-Mcmoran Inc"),("Carrier","Carrier"),("Nadro","Nadro"),("Dont Use-Goldcorp Inc","Dont Use-Goldcorp Inc"),("National Bank of Canada","National Bank of Canada"))
+	project = models.CharField(max_length=80,choices=PROJECT_OPTIONS)
 	whatsapp_number=PhoneNumberField(blank=True)
 	travel_start_date = models.DateField()
 	travel_end_date =  models.DateField()
-	CAPABILITY_OPTIONS = (("Capability1","Capability1"),("Capability2","Capability2"))
-	capability = models.CharField(max_length=20,choices=CAPABILITY_OPTIONS)
+	CAPABILITY_OPTIONS = (("Data and Analytics","Data and Analytics"),("Oracle","Oracle"),("SAP","SAP"),("Testing and PE","Testing and PE"),("Hostcentric platform","Hostcentric platform"),("Devops","Devops"),("Capital Markets processes","Capital Markets processes"),("Avanade","Avanade"),("Java Tech","Java Tech"))
+	capability = models.CharField(max_length=80,choices=CAPABILITY_OPTIONS)
      
 	def __str__(self):
 		return self.employee_name

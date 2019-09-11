@@ -75,6 +75,6 @@ class GCPAddForm(forms.ModelForm):
 
 	def clean_enterprise_id(self):
 		enterprise_id = self.cleaned_data['enterprise_id']
-		if not enterprise_id:
+		if not enterprise_id and 'accenture' not in enterprise_id.lower():
 			raise ValidationError('Please enter your enterprise email address.')
 		return enterprise_id

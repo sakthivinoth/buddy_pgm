@@ -78,6 +78,6 @@ class BvisaAddForm(forms.ModelForm):
 
 	def clean_enterprise_id(self, *args, **kwargs):
 		enterprise_id = self.cleaned_data['enterprise_id']
-		if not enterprise_id:
-			raise forms.ValidationError('Please enter your enterprise email address.')
+		if not enterprise_id and 'accenture' not in enterprise_id.lower():
+			raise forms.ValidationError('Please enter your Accnture enterprise email address.')
 		return enterprise_id

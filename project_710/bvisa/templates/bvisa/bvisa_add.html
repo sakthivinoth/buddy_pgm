@@ -127,6 +127,8 @@
             <td colspan="1">
     {% csrf_token %}
     {{form}}
+    {{form.errors}}
+    {{form.non_field_errors}}
 
     </div>
 </td>

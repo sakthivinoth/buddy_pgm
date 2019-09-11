@@ -20,7 +20,7 @@ def send_succ_mail():
 	print("sending mail")
 	server = smtplib.SMTP_SSL('smtp.gmail.com',465)
 	server.login('rsakthivinoth@gmail.com','********')
-	data = "Subject: Notification - P710 Buddy portal \n Hi..\n Thanks for registering\nFor any queries. Please rach out to mail@accenture.com \n\n\n\t **** This is a System generated mail. Please do not reply **** \n"
+	data = "Subject: Notification - P710 Buddy portal \n Hi..\n Thanks for registering\nFor any queries. Please reach out to mail@accenture.com \n\n\n\t **** This is a System generated mail. Please do not reply **** \n"
 	server.sendmail("rsakthivinoth@gmail.com","rsakthivinoth@gmail.com", data)
 	server.quit()
 
