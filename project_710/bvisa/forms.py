@@ -17,29 +17,16 @@ class BvisaAddForm(forms.ModelForm):
 		'employee_name',
 		'enterprise_id',
 		'project',
-		# 'whatsapp_number_country_code',
 		'whatsapp_number',
 		'travel_start_date',
 		'travel_end_date',
 		'capability']
 
-	#attrs = {'class':'form-control'}
 
 		widgets = {
 		            'travel_start_date': DateInput(),
 		            'travel_end_date': DateInput(),
 		        }
-	#widgets = {
-	# employee_name =forms.CharField(label='', widget=forms.TextInput()),
-	# enterprise_id=forms.CharField(label='', widget=forms.TextInput()),
-	# project=forms.Select(choices=Bvisa.PROJECT_OPTIONS),
-	# whatsapp_number=forms.CharField(label='', widget=forms.TextInput()),
-	# travel_start_date=forms.DateInput(),
-	# travel_end_date=forms.DateInput(),
-	# capability=forms.Select(choices=Bvisa.CAPABILITY_OPTIONS),
-	# def clean_whatsapp_number_country_code(self, *args, **kwargs):
-
-
 
 
 	def clean_employee_name(self, *args, **kwargs):
@@ -49,12 +36,9 @@ class BvisaAddForm(forms.ModelForm):
 		return employee_name
 
 	def clean_whatsapp_number(self, *args, **kwargs):
-		# whatsapp_number_country_code = self.cleaned_data['whatsapp_number_country_code']
-		# if not whatsapp_number_country_code:
-		# 	raise forms.ValidationError('Please enter your Whatsapp Number Country Code.')
 		whatsapp_number = self.cleaned_data['whatsapp_number']
 		if not whatsapp_number:
-			raise forms.ValidationError('Please enter your Whatsapp Number.')
+			raise ValidationError('Please enter your Whatsapp Number.')
 		return whatsapp_number
 
 	def clean_travel_start_date(self, *args, **kwargs):
@@ -71,13 +55,13 @@ class BvisaAddForm(forms.ModelForm):
 
 	def clean_project(self, *args, **Kwargs):
 		project = self.cleaned_data.get('project')
-		if project.lower()  in ['cigna','anthem']:
+		if project:
 			return project
 		else:
 			raise forms.ValidationError("Please enter a valid Project")
 
 	def clean_enterprise_id(self, *args, **kwargs):
 		enterprise_id = self.cleaned_data['enterprise_id']
-		if not enterprise_id and 'accenture' not in enterprise_id.lower():
-			raise forms.ValidationError('Please enter your Accnture enterprise email address.')
+		if not enterprise_id or 'accenture' not in enterprise_id.lower():
+			raise forms.ValidationError('Please enter your Accenture enterprise email address.')
 		return enterprise_id

@@ -80,7 +80,7 @@
 						</div>
 					</div>
 					<div class="intro-text">
-						<div class="intro-heading">Form -Add New 710 Info  !!</div>
+						<div class="intro-heading">Form -Add New P710 Info  !!</div>
 						<div class="intro-lead-in">Please fill in  your details</div>
 						
 					</div>
@@ -126,32 +126,32 @@
          <tr>
             <td colspan="1">
     {% csrf_token %}
-    {{form}}
-    {{form.errors}}
-    {{form.non_field_errors}}
+    {{ form }}
 
     </div>
 </td>
 </tr>
 <tr>
+
   <td> <input type="submit" value="Submit" />
   </td>
 </tr>
-</form>
+
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+{% endif %}</form>
 </tbody>
 </table>
 <li>Note: Enter phone number along with country code ex: +91xxxxxxxxxx</li>
 </div>
-<br>
-{% for fieldname, error_list in form.errors %}{% endfor %}
-<br>
-    {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
+
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark pt-4">
 

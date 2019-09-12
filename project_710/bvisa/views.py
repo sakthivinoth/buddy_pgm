@@ -5,7 +5,6 @@ from .forms import BvisaAddForm
 from .models import Bvisa
 
 import smtplib
-
 from django.contrib import messages
 
 def send_mail(employee_name, enterprise_id, project, no, start_date, end_date,cap):
@@ -27,35 +26,27 @@ def send_succ_mail():
 def bvisa_add_view(request, *args, **kwargs):
 	if request.method =='POST':
 		form = BvisaAddForm(request.POST)
-		print(form)
-		print(dir(form))
 		if form.is_valid():
-			print("validated")
 			model_instance = form.save(commit=False)
 			model_instance.save()
 			form.save()
 			clean = form.cleaned_data
 			if clean:
-				print("Clean")
 				print(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
 				#send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
 				#send_succ_mail()
+				form = BvisaAddForm()
 				context ={'form':form}
-				
 				messages.success(request, 'Form submission successful')
 				return HttpResponseRedirect('')
 			else:
-				print("into clean else")
-				print(form.errors.as_text)
-				print(dir(form.errors.as_text))
+				context ={'form':form}
 				messages.error(request, 'Form submission not successful. Please retry with Valid values')
-				return HttpResponseRedirect('')
+				return render (request,'bvisa/bvisa_add.html',{'form':form})
 		else:
-			print("into else ")
-			print(form.errors.as_text)
-			print(dir(form.errors.as_text))
+			context ={'form':form}
 			messages.error(request, 'Form submission not successful. Please retry with Valid values')
-			return HttpResponseRedirect('')
+			return render (request,'bvisa/bvisa_add.html',{'form':form})
 	else:
 		form = BvisaAddForm()
 		context = {'form':form}

@@ -15,7 +15,6 @@ class GCPAddForm(forms.ModelForm):
 		'employee_name',
 		'enterprise_id',
 		'project',
-		# 'whatsapp_number_country_code',
 		'whatsapp_number',
 		'travel_start_date',
 		'capability']
@@ -24,19 +23,6 @@ class GCPAddForm(forms.ModelForm):
 		            'travel_start_date': DateInput(),
 		            'travel_end_date': DateInput(),
 		        }
-		# attrs = {'class':'form-control'}
-		# widgets = {
-		# 'employee_name':forms.TextInput(attrs=attrs),
-		# 'enterprise_id':forms.TextInput(attrs=attrs),
-		# 'project':forms.Select(choices=GCP.PROJECT_OPTIONS,attrs=attrs),
-		# 'whatsapp_number':forms.TextInput(attrs=attrs),
-		# 'travel_start_date':forms.DateInput(attrs=attrs),
-		# 'travel_end_date':forms.DateInput(attrs=attrs),
-		# 'email':forms.TextInput(attrs=attrs),
-		# 'region':forms.Select(choices=GCP.CAPABILITY_OPTIONS,attrs=attrs),
-
-		# }
-
 
 
 	def clean_employee_name(self):
@@ -46,12 +32,9 @@ class GCPAddForm(forms.ModelForm):
 		return employee_name
 
 	def clean_whatsapp_number(self, *args, **kwargs):
-		# whatsapp_number_country_code = self.cleaned_data['whatsapp_number_country_code']
-		# if not whatsapp_number_country_code:
-		# 	raise forms.ValidationError('Please enter your Whatsapp Number Country Code.')
 		whatsapp_number = self.cleaned_data['whatsapp_number']
 		if not whatsapp_number:
-			raise forms.ValidationError('Please enter your Whatsapp Number.')
+			raise ValidationError('Please enter your Whatsapp Number.')
 		return whatsapp_number
 		
 	def clean_travel_start_date(self):
@@ -59,12 +42,6 @@ class GCPAddForm(forms.ModelForm):
 		if not travel_start_date:
 			raise ValidationError('Please enter your Travel start date.')
 		return travel_start_date
-
-	def clean_travel_end_date(self):
-		travel_end_date = self.cleaned_data['travel_end_date']
-		if not travel_end_date:
-			raise ValidationError('Please enter your Travel end date.')
-		return travel_end_date
 
 	def clean_project(self, *args, **Kwargs):
 		project = self.cleaned_data.get('project')
@@ -75,6 +52,6 @@ class GCPAddForm(forms.ModelForm):
 
 	def clean_enterprise_id(self):
 		enterprise_id = self.cleaned_data['enterprise_id']
-		if not enterprise_id and 'accenture' not in enterprise_id.lower():
-			raise ValidationError('Please enter your enterprise email address.')
+		if not enterprise_id or 'accenture' not in enterprise_id.lower():
+			raise ValidationError('Please enter your Accenture enterprise email address.')
 		return enterprise_id

@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-
+from django import forms
 from .forms import GCPAddForm
 from .models import GCP
 
@@ -25,32 +25,29 @@ def send_succ_mail():
 
 def GCP_add_view(request, *args, **kwargs):
 	if request.method =='POST':
-		form = GCPAddForm(request.POST or None)
+		form = GCPAddForm(request.POST)
 		if form.is_valid():
+			model_instance = form.save(commit=False)
+			model_instance.save()
 			form.save()
 			clean = form.cleaned_data
 			if clean:
+				print(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['capability'])
 				#send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
 				#send_succ_mail()
+				form = GCPAddForm()
 				context ={'form':form}
-				messages.success(request, 'Form validation successful.Thank you!!')
+				messages.success(request, 'Form submission successful')
 				return HttpResponseRedirect('')
+			else:
+				context ={'form':form}
+				messages.error(request, 'Form submission not successful. Please retry with Valid values')
+				return render (request,'gcp/gcp_add.html',{'form':form})
 		else:
-			messages.warning(request, 'Form submission is not successful. Please retry with valid values')
-			return HttpResponseRedirect('')
+			context ={'form':form}
+			messages.error(request, 'Form submission not successful. Please retry with Valid values')
+			return render (request,'gcp/gcp_add.html',{'form':form})
 	else:
 		form = GCPAddForm()
 		context = {'form':form}
 		return render (request,'gcp/gcp_add.html',context)
-
-# Create your views here.
-def GCP_view(request,*args, **kwargs):
-	
-	context = {}
-	return render (request, "gcp.html",context)
-
-
-def GCP_detail_view(request, *args, **kwargs):
-	obj = GCP.objects.get(id=1)
-	context ={'object':obj}
-	return render (request,'gcp/gcp_detail.html',context)
