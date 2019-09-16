@@ -7,11 +7,11 @@ from .models import GCP
 import smtplib
 from django.contrib import messages
 
-def send_mail(employee_name, enterprise_id, project, no, start_date, end_date,cap):
+def send_mail(employee_name, enterprise_id, project, no, start_date,cap):
 	print("sending mail")
 	server = smtplib.SMTP_SSL('smtp.gmail.com',465)
 	server.login('rsakthivinoth@gmail.com','*******')
-	data = "Subject: Notification- New P750 Resource. Please assign a buddy !!\n Hey Admins, Please find the below Resource \n\nEmployee name = "+str(employee_name)+"\nEnterprise Id = "+str(enterprise_id)+"\nProject = "+str(project)+"\nContact number = "+str(no)+"\nTravel Start date = "+str(start_date)+"\nTravel end date = "+str(end_date)+"\nCapability = "+str(cap)+"\n\n\t **** This is a System generated mail. Please do not reply **** \n"
+	data = "Subject: Notification- New P750 Resource. Please assign a buddy !!\n Hey Admins, Please find the below Resource \n\nEmployee name = "+str(employee_name)+"\nEnterprise Id = "+str(enterprise_id)+"\nProject = "+str(project)+"\nContact number = "+str(no)+"\nTravel Start date = "+str(start_date)+"\nCapability = "+str(cap)+"\n\n\t **** This is a System generated mail. Please do not reply **** \n"
 	server.sendmail("rsakthivinoth@gmail.com","rsakthivinoth@gmail.com", data)
 	server.quit()
 
@@ -33,7 +33,7 @@ def GCP_add_view(request, *args, **kwargs):
 			clean = form.cleaned_data
 			if clean:
 				print(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['capability'])
-				send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+				send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['capability'])
 				send_succ_mail()
 				form = GCPAddForm()
 				context ={'form':form}

@@ -3,6 +3,7 @@ from .models import GCP
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from bootstrap_datepicker_plus import DatePickerInput
+from datetime import date 
 
 class DateInput(forms.DateInput):
     input_type = 'date'
