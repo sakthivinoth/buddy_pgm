@@ -4,6 +4,8 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from bootstrap_datepicker_plus import DatePickerInput
 from phonenumber_field.modelfields import PhoneNumberField
+from datetime import date 
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -43,14 +45,24 @@ class BvisaAddForm(forms.ModelForm):
 
 	def clean_travel_start_date(self, *args, **kwargs):
 		travel_start_date = self.cleaned_data['travel_start_date']
+		today = date.today()
+		today = today.strftime("%Y-%m-%d")
+		if str(travel_start_date) <= str(today):
+			raise forms.ValidationError('Please enter your Travel start date.It should be future date')
 		if not travel_start_date:
 			raise forms.ValidationError('Please enter your Travel start date.')
 		return travel_start_date
 
 	def clean_travel_end_date(self, *args, **kwargs):
 		travel_end_date = self.cleaned_data['travel_end_date']
+		try:
+			travel_start_date = self.cleaned_data['travel_start_date']
+		except:
+			travel_start_date = ''
 		if not travel_end_date:
 			raise forms.ValidationError('Please enter your Travel end date.')
+		if str(travel_end_date) <= str(travel_start_date):
+			raise forms.ValidationError('Please enter a valid Travel end date.It should be greater than travel start date')
 		return travel_end_date
 
 	def clean_project(self, *args, **Kwargs):

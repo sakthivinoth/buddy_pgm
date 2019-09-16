@@ -37,10 +37,14 @@ class GCPAddForm(forms.ModelForm):
 			raise ValidationError('Please enter your Whatsapp Number.')
 		return whatsapp_number
 		
-	def clean_travel_start_date(self):
+	def clean_travel_start_date(self, *args, **kwargs):
 		travel_start_date = self.cleaned_data['travel_start_date']
+		today = date.today()
+		today = today.strftime("%Y-%m-%d")
+		if str(travel_start_date) <= str(today):
+			raise forms.ValidationError('Please enter your Travel start date.It should be future date')
 		if not travel_start_date:
-			raise ValidationError('Please enter your Travel start date.')
+			raise forms.ValidationError('Please enter your Travel start date.')
 		return travel_start_date
 
 	def clean_project(self, *args, **Kwargs):

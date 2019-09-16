@@ -33,8 +33,8 @@ def GCP_add_view(request, *args, **kwargs):
 			clean = form.cleaned_data
 			if clean:
 				print(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['capability'])
-				#send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
-				#send_succ_mail()
+				send_mail(clean['employee_name'], clean['enterprise_id'], clean['project'],clean['whatsapp_number'],clean['travel_start_date'],clean['travel_end_date'],clean['capability'])
+				send_succ_mail()
 				form = GCPAddForm()
 				context ={'form':form}
 				messages.success(request, 'Form submission successful')
