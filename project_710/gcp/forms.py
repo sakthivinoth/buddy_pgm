@@ -50,7 +50,7 @@ class GCPAddForm(forms.ModelForm):
 
 	def clean_project(self, *args, **Kwargs):
 		project = self.cleaned_data.get('project')
-		if project.lower()  in ['cigna','anthem']:
+		if project:
 			return project
 		else:
 			raise forms.ValidationError("Please enter a valid Project")
